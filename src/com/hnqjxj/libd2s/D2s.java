@@ -1,6 +1,5 @@
 package com.hnqjxj.libd2s;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
@@ -10,11 +9,13 @@ public class D2s {
 	private String d2sFileName;
 	private RandomAccessFile origFile;
 	private D2sHeader header;
+	private D2sCharStat stat;
 
-	public D2s(String d2sFilename) throws FileNotFoundException {
+	public D2s(String d2sFilename) throws IOException {
 		this.d2sFileName = d2sFilename;
 		origFile = new RandomAccessFile(d2sFileName, "rw");
 		this.header = new D2sHeader(origFile);
+		this.stat=new D2sCharStat(origFile);
 	}
 
 	public void close() throws IOException {
@@ -24,12 +25,9 @@ public class D2s {
 	public D2sHeader getHeader() {
 		return header;
 	}
-
-	public void getStrength() throws IOException {
-		origFile.seek(765);
-		byte[] buffer = new byte[] { 0, 0 };
-		origFile.read(buffer);
-		System.out.println(String.format("%x%x", buffer[0], buffer[1]));
+	
+	public D2sCharStat getCharStat() {
+		return stat;
 	}
 
 	public void checkSum() throws IOException {

@@ -2,12 +2,13 @@ package com.hnqjxj.libd2s;
 
 import java.io.IOException;
 
+
 public class Start {
 
 	public static void main(String[] args) throws IOException {
-		D2s d2s = new D2s("asd.d2s");
-		d2s.checkSum();
-		d2s.close();
+		 D2s d2s = new D2s("asd.d2s");
+		 //d2s.checkSum();
+		 d2s.close();
 	}
 
 	public static void printD2sInfo(D2s d2s) throws IOException {
