@@ -23,4 +23,18 @@ public class ConvertUtil {
 	public static int binToInt(String bin) {
 		return new BigInteger(bin, 2).intValue();
 	}
+
+	public static String intToBin(int src, int binLen) throws Exception {
+		String srcBin = Integer.toBinaryString(src);
+		if (binLen > srcBin.length()) {
+			char[] buffer = new char[binLen - srcBin.length()];
+			for (int i = 0; i < buffer.length; i++) {
+				buffer[i] = '0';
+			}
+			srcBin = new String(buffer).concat(srcBin);
+		} else if (binLen < srcBin.length()) {
+			throw new Exception("out of length");
+		}
+		return srcBin;
+	}
 }
